@@ -12,6 +12,17 @@ const createUser = async (body) => {
   return { token };
 };
 
+const getAll = async () => {
+  const all = await User.findAll();
+  const ab = all.map((a) => {
+    const needed = a.dataValues;
+    delete needed.password;
+    return needed;
+  });
+  return ab;
+};
+
 module.exports = {
   createUser,
+  getAll,
 };

@@ -5,5 +5,6 @@ const controllers = require('../../database/controllers/categoryController');
 const categoriesRouter = express.Router();
 
 categoriesRouter.post('/', validateToken, controllers.createCategory);
+categoriesRouter.get('/', validateToken, controllers.getAll);
 
 module.exports = categoriesRouter;

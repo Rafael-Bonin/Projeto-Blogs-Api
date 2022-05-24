@@ -22,7 +22,17 @@ const getAll = async () => {
   return ab;
 };
 
+const getById = async (id) => {
+  const user = await User.findByPk(id);
+  if (!user) throw generateErr(404, 'User does not exist');
+  const { dataValues } = user;
+  delete dataValues.password;
+  console.log(dataValues);
+  return dataValues;
+};
+
 module.exports = {
   createUser,
   getAll,
+  getById,
 };

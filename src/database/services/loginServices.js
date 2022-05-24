@@ -9,7 +9,6 @@ const login = async (body) => {
   if (!exists) throw generateErr(400, 'Invalid fields');
   const { dataValues } = exists;
   delete dataValues.password;
-  console.log(dataValues);
   const token = generateToken(dataValues);
   return token;
 };

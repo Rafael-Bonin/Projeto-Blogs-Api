@@ -32,8 +32,22 @@ const byId = async (req, res, next) => {
   }
 };
 
+const update = async (req, res, next) => {
+  try {
+    const { body, user } = req;
+    const { id } = req.params;
+    const { dataValues } = await user;
+    const userId = dataValues.id;
+    const updated = await services.update(body, id, userId);
+    return res.status(200).json(updated);
+  } catch (err) {
+    next(err);
+  }
+}
+
 module.exports = {
   createPost,
   getAll,
   byId,
+  update,
 };

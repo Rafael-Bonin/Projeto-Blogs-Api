@@ -13,6 +13,16 @@ const createPost = async (req, res) => {
   }
 };
 
+const getAll = async (_req, res) => {
+  try {
+    const all = await services.getAll();
+    return res.status(200).json(all);
+  } catch (err) {
+    return res.status(500).json({ message: 'Internal Error' });
+  }
+};
+
 module.exports = {
   createPost,
+  getAll,
 };

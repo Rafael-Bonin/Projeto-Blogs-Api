@@ -40,17 +40,17 @@ const byId = async (id) => {
 
 const update = async (body, id, userId) => {
   const { title, content } = body;
-  if(!title || !content) throw generateErr(400, 'Some required fields are missing');
+  if (!title || !content) throw generateErr(400, 'Some required fields are missing');
   const post = await BlogPost.findByPk(id, { include: [{
-    model: User, as: 'user', attributes: { exclude: ['password'] }
+    model: User, as: 'user', attributes: { exclude: ['password'] },
   }, {
-    model: Category, as: 'categories', through: { attributes: [] }
+    model: Category, as: 'categories', through: { attributes: [] },
   }] });
-  if(post.userId !== userId) throw generateErr(401, 'Unauthorized user');
+  if (post.userId !== userId) throw generateErr(401, 'Unauthorized user');
   await post.set({ title, content });
   await post.save();
   return post;
-}
+};
 
 module.exports = {
   createPost,

@@ -52,11 +52,21 @@ const update = async (body, id, userId) => {
   return post;
 };
 
+const remove = async (postId, userId) => {
+  const post = await byId(postId);
+  if (!post) throw generateErr(404, 'Post does not exist');
+  const { id } = post.user;
+  if (userId !== id) throw generateErr(401, 'Unauthorized user');
+  const a = await post.destroy();
+  return a;
+};
+
 module.exports = {
   createPost,
   getAll,
   byId,
   update,
+  remove,
 };
 
     // const exists = await categoryIds.map(async (c) => {

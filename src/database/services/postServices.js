@@ -57,8 +57,8 @@ const remove = async (postId, userId) => {
   if (!post) throw generateErr(404, 'Post does not exist');
   const { id } = post.user;
   if (userId !== id) throw generateErr(401, 'Unauthorized user');
-  const a = await post.destroy();
-  return a;
+  await post.destroy();
+  return 'deleted';
 };
 
 module.exports = {

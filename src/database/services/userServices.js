@@ -30,8 +30,15 @@ const getById = async (id) => {
   return dataValues;
 };
 
+const removeMe = async (userId) => {
+  const user = await User.findByPk(userId);
+  await user.destroy();
+  return 'Your account has been deleted';
+};
+
 module.exports = {
   createUser,
   getAll,
   getById,
+  removeMe,
 };

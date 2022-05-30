@@ -34,7 +34,6 @@ const update = async (req, res, next) => {
   try {
     const { body, userId } = req;
     const { id } = req.params;
-    console.log(userId);
     const updated = await services.update(body, id, userId);
     return res.status(200).json(updated);
   } catch (err) {
@@ -45,8 +44,7 @@ const update = async (req, res, next) => {
 const remove = async (req, res, next) => {
   try {
     const { params: { id }, userId } = req;
-    const a = await services.remove(id, userId);
-    console.log(a);
+    await services.remove(id, userId);
     return res.status(204).end();
   } catch (err) {
     next(err);

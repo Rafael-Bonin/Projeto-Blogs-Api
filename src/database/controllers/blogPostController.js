@@ -3,10 +3,8 @@ const services = require('../services/postServices');
 const createPost = async (req, res) => {
   try {
     const { body } = req;
-    const { user } = req;
-    const { dataValues } = await user;
-    const { id } = dataValues;
-    const create = await services.createPost(body, id);
+    const { userId } = req;
+    const create = await services.createPost(body, userId);
     return res.status(201).json(create);
   } catch (err) {
     return res.status(400).json({ message: err.message });
@@ -34,10 +32,9 @@ const byId = async (req, res, next) => {
 
 const update = async (req, res, next) => {
   try {
-    const { body, user } = req;
+    const { body, userId } = req;
     const { id } = req.params;
-    const { dataValues } = await user;
-    const userId = dataValues.id;
+    console.log(userId);
     const updated = await services.update(body, id, userId);
     return res.status(200).json(updated);
   } catch (err) {

@@ -27,7 +27,6 @@ const getById = async (id) => {
   if (!user) throw generateErr(404, 'User does not exist');
   const { dataValues } = user;
   delete dataValues.password;
-  console.log(dataValues);
   return dataValues;
 };
 
